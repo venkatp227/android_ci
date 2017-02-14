@@ -1,5 +1,35 @@
 apply plugin: 'com.android.application'
 
+project.ext{
+
+    versionName = "1.0"
+    versionCode = 1
+
+}
+
+project.afterEvaluate {
+
+    preBuild{}.dependsOn updateProjectInfo
+
+}
+
+task updateProjectInfo() {
+    println( "Updating project info from CI" )
+
+    //-PCIversionName
+    if (project.hasProperty("CIversionName")) {
+        println( "Version name: " + CIversionName )
+        project.ext.versionName = CIversionName
+    }
+
+    //-PCIversionCode
+    if (project.hasProperty("CIversionCode")) {
+        println( "Version Code: " + CIversionCode )
+        project.ext.versionCode = CIversionCode
+    }
+
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -7,8 +37,8 @@ android {
         applicationId "com.example.udemy.myapp01"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode = project.ext.versionCode.toInteger()
+        versionName = project.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,3 +57,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
 }
+
+
+clean.dependsOn updateProjectInfo
