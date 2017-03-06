@@ -7,7 +7,7 @@ machine:
     # Date format to be used in naming
     # yyyymmddHHMM
     VERSION_DATE : $(date +%Y%m%d%k%M)
-
+    APK_NAME: '/app/outputs/apk/app-debug.apk'
 
   java:
     version: oraclejdk8
@@ -21,8 +21,6 @@ dependencies:
 
 test:
     override:
-        - ./gradlew clean
-        - ./gradlew tasks
         - ./gradlew assembleDebug -PCIversionName=$APP_VERSION_NAME.$VERSION_DATE -PCIversionCode=$((APP_VERSION_CODE+1))
         - cp -r app/build/outputs $CIRCLE_ARTIFACTS
 
@@ -34,6 +32,6 @@ deployment:
       #   1. Build location 
       #   2. API token from environment variable (CircleCI dashboard)
       #   3. Hockey App APP_ID
-      - ./scripts/deploy_hockeyapp.sh $CIRCLE_ARTIFACTS.'/app/outputs/apk/app-debug.apk' $AWESOME_TOKEN $HOCKEYAPP_APP_ID
+      - ./scripts/deploy_hockeyapp.sh $CIRCLE_ARTIFACTS.$APK_NAME $AWESOME_TOKEN $HOCKEYAPP_APP_ID
 
 
