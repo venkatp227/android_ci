@@ -19,9 +19,7 @@ echo $ACCESS_TOKEN
 # Theird one is application id
 APP_ID=$3
 
-echo APP_ID
+echo $APP_ID
 
 echo "Deployment finished!"
-
-
 
