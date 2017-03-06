@@ -34,6 +34,6 @@ deployment:
       #   1. Build location 
       #   2. API token from environment variable (CircleCI dashboard)
       #   3. Hockey App APP_ID
-      - ./scripts/deploy_hockeyapp.sh $CIRCLE_ARTIFACTS $AWESOME_TOKEN $HOCKEYAPP_APP_ID
+      - ./scripts/deploy_hockeyapp.sh $CIRCLE_ARTIFACTS.'/app/outputs/apk/app-debug.apk' $AWESOME_TOKEN $HOCKEYAPP_APP_ID
 
 
