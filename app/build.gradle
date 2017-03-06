@@ -40,6 +40,8 @@ android {
         versionCode = project.ext.versionCode.toInteger()
         versionName = project.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [HOCKEYAPP_APP_ID: "43abb313302c463ea353678b6d61dd5c"]
     }
     buildTypes {
         release {
@@ -56,6 +58,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
+
+    // Hockey App
+    compile 'net.hockeyapp.android:HockeySDK:4.1.2'
 }
 
 
