@@ -23,5 +23,12 @@ APP_ID=$3
 
 echo $APP_ID
 
+curl \
+-F "status=2" \
+-F "notify=2" \
+-F "ipa=@$APK_PATH" \
+-H "X-HockeyAppToken:$ACCESS_TOKEN" \
+https://rink.hockeyapp.net/api/2/apps/$APP_ID/app_versions/upload
+
 echo "Deployment finished!"
 
